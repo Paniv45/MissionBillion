@@ -1,0 +1,46 @@
+/* Custom Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black; /* Match dashboard background */
+  padding: 10px 20px;
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+}
+
+.navbar-brand a {
+  color: rgb(89, 224, 248); /* Blue color to match primary button */
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  color: white; /* White text */
+  font-size: 18px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #0056b3; /* Darker blue for hover effect */
+  color: #fff; /* Ensure text is white on hover */
+}
+
+
+
+.dashboard-header p {
+  color: #dddddd;
+  font-size: 16px;
+  margin-bottom: 20px; /* Add margin for space between paragraph and animated words */
+  display: flex; /* Use flexbox to align text and image */
+  align-items: center; /* Center-align items vertically */
+}
+
+.header-image {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-left: 10px; /* Space between text and image */
+}

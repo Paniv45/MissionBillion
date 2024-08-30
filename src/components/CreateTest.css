@@ -1,0 +1,84 @@
+/* Container for the Create Test page */
+.create-test-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.create-test-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-test-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Subject columns container */
+.subject-columns {
+  display: flex;
+  flex-direction: column; /* Stack columns vertically on small screens */
+  gap: 20px; /* Add gap between columns */
+}
+
+@media (min-width: 768px) {
+  .subject-columns {
+    flex-direction: row; /* Arrange columns horizontally on larger screens */
+  }
+}
+
+/* Section for each subject */
+.subject-section {
+  display: flex;
+  flex-direction: column; /* Vertical alignment for chapters */
+  align-items: flex-start; /* Align items to the left */
+  flex: 1; /* Equal width for each column */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+}
+
+/* Heading styles for subjects */
+.subject-section h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Checkbox container for chapters */
+.chapter-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Label styles for chapters */
+.chapter-checkbox label {
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+/* Form group styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+.label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input and textarea styling */
+.input,
+.textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
