@@ -1,0 +1,62 @@
+/* Custom Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black !important; /* Ensure it overrides dashboard background */
+  padding: 10px 20px;
+  border: none !important; /* Remove border */
+  box-shadow: none !important; /* Remove shadow */
+}
+
+.navbar-brand a {
+  color: white !important; /* White color for brand */
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-nav-left {
+  display: flex;
+  flex-direction: row;
+  margin-right: auto; /* Pushes this section to the left */
+}
+
+.navbar-nav-right {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Styling for Nav Links */
+.navbar-nav-left .nav-link {
+  color: white !important; /* White text for links */
+  font-size: 18px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.navbar-nav-left .nav-link:hover {
+  background-color: #0056b3 !important; /* Darker blue for hover effect */
+  color: #fff !important; /* Ensure text is white on hover */
+}
+
+/* Styling for Buttons */
+.navbar-nav-right .btn {
+  color: white !important; /* White text for buttons */
+  background-color: black !important; /* Black background to match navbar */
+  border: 1px solid white !important; /* White border to match links */
+  font-size: 18px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav-right .btn:hover {
+  background-color: #0056b3 !important; /* Darker blue for hover effect */
+  color: #fff !important; /* Ensure text is white on hover */
+}
+
+.navbar-brand {
+  color: rgb(245, 239, 239) !important; /* Hover color for brand */
+}

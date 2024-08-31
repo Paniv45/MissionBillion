@@ -1,0 +1,65 @@
+/* Login Modal Styling */
+.login-modal .modal-dialog {
+  max-width: 500px; /* Adjust the size as needed */
+}
+
+.login-modal .modal-content {
+  border-radius: 10px; /* Rounded corners */
+}
+
+.login-modal .modal-header {
+  border-bottom: none; /* Remove the bottom border */
+  text-align: center; /* Center the title */
+}
+
+.login-modal .modal-title {
+  font-size: 24px; /* Title font size */
+  color: white; /* Title text color */
+}
+
+.login-modal .modal-body {
+  background-color: #333; /* Dark background */
+  padding: 20px;
+}
+
+.login-modal .login-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-modal .google-signin {
+  width: 100%; /* Ensure it takes full width */
+  text-align: center; /* Center the Google sign-in button */
+  margin-bottom: 20px;
+}
+
+.login-modal .divider {
+  margin: 10px 0;
+  color: white;
+  font-size: 18px;
+}
+
+.login-modal .login-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center-align the button */
+}
+
+.login-modal .signup-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-modal .signup-link button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.login-modal .signup-link button:hover {
+  color: #0056b3;
+}

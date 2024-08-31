@@ -1,0 +1,244 @@
+/* Ensure full height for html and body */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dashboard Container */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: black;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Header Section */
+.dashboard-header {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.dashboard-header p {
+  color: #dddddd;
+  font-size: 16px;
+  display: flex; /* Enable flexbox */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Center the content */
+  gap: 10px; /* Space between text and icon */
+}
+
+.header-icon {
+  font-size: 24px; /* Adjust icon size */
+  color: #007bff; /* Icon color */
+}
+
+/* Primary Button */
+.primary-button {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, border-color 0.5s ease, transform 0.4s;
+  outline: none;
+  overflow: hidden;
+  background-color: rgb(113, 97, 232);
+}
+
+.primary-button:hover {
+  background-color: #0056b3;
+  border: 2px solid #003d80;
+}
+
+.primary-button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+  transform: scale(0.5);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.primary-button:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Features Section */
+.features-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 10px);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid white; /* White border */
+  color: white;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
+
+.feature-icon {
+  font-size: 40px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.feature-card h3 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: white;
+}
+
+/* Footer Section */
+.dashboard-footer {
+  margin-top: 20px;
+  color: #dddddd;
+  text-align: center;
+}
+
+/* Info Box */
+.info-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 45%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .features-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feature-card {
+    width: 100%;
+  }
+
+  .dashboard-footer {
+    padding: 10px;
+  }
+
+  .primary-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 20px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .feature-icon {
+    font-size: 30px;
+  }
+
+  .features-section {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .feature-card {
+    padding: 15px;
+  }
+
+  .primary-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+/* Signup Overlay */
+.signup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Ensure it appears above other content */
+}
+
+/* Signup Form Container */
+.signup-form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+}
+
+/* Button to open signup form */
+.primary-button {
+  /* Existing styles */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .signup-form-container {
+    width: 90%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-form-container {
+    width: 95%;
+    padding: 10px;
+  }
+}
