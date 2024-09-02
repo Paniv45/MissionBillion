@@ -45,6 +45,7 @@ import LoginModal from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import CreateTest from './components/CreateTest';
+import TestPage from "./components/TestPage";
 
 const App = () => {
   return (
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/create-test" element={<CreateTest />} />
         <Route path="/" element={<Dashboard />} />
+        <Route path="TestPage" element={<TestPage/>} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>
