@@ -3,6 +3,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Dashboard Container */
@@ -12,8 +13,9 @@ html, body {
   align-items: center;
   padding: 20px;
   background-color: black;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
+  height: 100vh; /* Full viewport height */
   box-sizing: border-box; /* Include padding in height calculation */
+   /* Allow vertical scroll if needed */
 }
 
 /* Header Section */
@@ -128,21 +130,7 @@ html, body {
   color: white;
 }
 
-/* Footer Section */
-.dashboard-footer {
-  margin-top: 20px;
-  color: #dddddd;
-  text-align: center;
-}
 
-/* Info Box */
-.info-box {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 45%;
-}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -223,12 +211,6 @@ html, body {
   position: relative;
 }
 
-/* Button to open signup form */
-.primary-button {
-  /* Existing styles */
-}
-
-/* Responsive Styles */
 @media (max-width: 768px) {
   .signup-form-container {
     width: 90%;

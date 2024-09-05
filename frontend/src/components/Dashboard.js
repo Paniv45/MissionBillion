@@ -4,6 +4,7 @@ import './Dashboard.css';
 import NavigationBar from './NavigationBar';
 import { FaChalkboardTeacher, FaChartLine, FaClipboardList, FaLightbulb, FaRocket } from 'react-icons/fa';
 import LoginModal from './Login'; // Corrected import
+import Footer from './Footer'; // Import the Footer component
 
 const Dashboard = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -56,13 +57,12 @@ const Dashboard = () => {
           </div>
         </section>
 
-        <footer className="dashboard-footer">
-          <p>© 2024 Your Learning Platform. All Rights Reserved.</p>
-        </footer>
-
         {/* Render the login modal */}
         <LoginModal show={showLoginModal} handleClose={() => setShowLoginModal(false)} />
       </div>
+      
+      {/* Render the Footer component */}
+      <Footer />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
-import './CreateTest.css'; // Import CSS for styling
-import axios from 'axios'; // Axios for API requests
+import './CreateTest.css';
+import axios from 'axios';
 
 const CreateTest = () => {
   const [chapters, setChapters] = useState({
@@ -11,7 +11,8 @@ const CreateTest = () => {
     Maths: [],
   });
   const [selectedYear, setSelectedYear] = useState('');
-  const [selectedClass, setSelectedClass] = useState(''); // State to track the selected class
+  const [selectedClass, setSelectedClass] = useState('');
+  const [includePYQ, setIncludePYQ] = useState(false); // New state for PYQ selection
   const [selectedChapters, setSelectedChapters] = useState({
     Physics: [],
     Chemistry: [],
@@ -20,21 +21,19 @@ const CreateTest = () => {
 
   const navigate = useNavigate();
 
-  // Fetch chapters based on selected class
   useEffect(() => {
     const fetchChapters = async () => {
       if (selectedClass) {
         try {
-          // Fetch chapters based on selected class
-          const response = await axios.get(`http://example.com/api/chapters?class=${selectedClass}`); // Replace with your actual API URL
-          setChapters(response.data); // Update chapters state
+          const response = await axios.get(`http://example.com/api/chapters?class=${selectedClass}`);
+          setChapters(response.data);
         } catch (error) {
           console.error('Error fetching chapters:', error);
         }
       }
     };
 
-    fetchChapters(); // Call fetchChapters when selectedClass changes
+    fetchChapters();
   }, [selectedClass]);
 
   const handleYearChange = (event) => {
@@ -42,7 +41,14 @@ const CreateTest = () => {
   };
 
   const handleClassChange = (event) => {
-    setSelectedClass(event.target.value); // Set the class based on dropdown selection
+    setSelectedClass(event.target.value);
+  };
+
+  const handlePYQChange = (event) => {
+    setIncludePYQ(event.target.value === 'yes');
+    if (event.target.value !== 'yes') {
+      setSelectedYear(''); // Reset year if not PYQ
+    }
   };
 
   const handleChapterChange = (subject, chapter) => {
@@ -55,7 +61,7 @@ const CreateTest = () => {
   };
 
   const handleStartTest = () => {
-    navigate('/TestPage', { state: { selectedYear, selectedChapters, selectedClass } });
+    navigate('/TestPage', { state: { selectedYear, selectedChapters, selectedClass, includePYQ } });
   };
 
   return (
@@ -65,8 +71,17 @@ const CreateTest = () => {
       <div className="create-test-container">
         <h1>Create Test</h1>
 
-        {/* Year and Class Selection */}
-        <div className="selection-row">
+        {/* PYQ Selection */}
+        <div className="dropdown-container">
+          <h2>Include Previous Year Questions (PYQ)?</h2>
+          <select value={includePYQ ? 'yes' : 'no'} onChange={handlePYQChange} className="class-dropdown">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+
+        {/* Conditional Year Selection */}
+        {includePYQ && (
           <div className="dropdown-container">
             <h2>Choose Year for PYQ:</h2>
             <select value={selectedYear} onChange={handleYearChange} className="year-dropdown">
@@ -79,20 +94,20 @@ const CreateTest = () => {
               <option value="2019">2019</option>
             </select>
           </div>
+        )}
 
-          {/* Class Selection Dropdown */}
-          <div className="dropdown-container">
-            <h2>Select Class:</h2>
-            <select value={selectedClass} onChange={handleClassChange} className="class-dropdown">
-              <option value="">Select Class</option>
-              <option value="11">11th</option>
-              <option value="12">12th</option>
-              <option value="combined">Combined</option> {/* For full combined test */}
-            </select>
-          </div>
+        {/* Class Selection Dropdown */}
+        <div className="dropdown-container">
+          <h2>Select Class:</h2>
+          <select value={selectedClass} onChange={handleClassChange} className="class-dropdown">
+            <option value="">Select Class</option>
+            <option value="11">11th</option>
+            <option value="12">12th</option>
+            <option value="combined">Combined</option>
+          </select>
         </div>
 
-        <h2>Choose topics:</h2>
+        <h2>Choose Topics:</h2>
         <div className="subject-columns">
           {Object.entries(chapters).map(([subject, chapterList]) => (
             <div key={subject} className="subject-section">

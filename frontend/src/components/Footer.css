@@ -1,0 +1,10 @@
+.dashboard-footer {
+    width: 100%;
+    text-align: center;
+    color: #dddddd;
+    padding: 10px;
+    background-color: hsl(0, 100%, 0%); /* Optional background color for the footer */
+   /* Keeps the footer at the bottom if the content is short */
+    bottom: 0;
+  }
+  
