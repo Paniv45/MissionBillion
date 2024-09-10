@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode'; // Updated import
+import {jwtDecode} from 'jwt-decode'; // Corrected import
 import './Signup.css';
 
 const Signup = () => {
@@ -14,31 +14,44 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Replace with your backend signup API
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    if (response.ok) {
-      navigate('/login'); // Redirect to login after successful signup
-    } else {
-      alert('Signup failed');
+    try {
+      // Use the correct backend URL and ensure the route matches your backend definition
+      const response = await fetch('http://localhost:5000/api/auth/signup', { // Correct URL
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        navigate('/login'); // Redirect to login after successful signup
+      } else {
+        const errorData = await response.json(); // Handle error from server
+        alert(`Signup failed: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred during signup. Please try again.');
     }
   };
+  
 
   const handleGoogleSuccess = async (response) => {
-    const decoded = jwtDecode(response.credential); // Updated function name
-    // Process the Google sign-in data (e.g., send to backend to create a user or log in)
-    const res = await fetch('/api/google-signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: decoded.email, name: decoded.name, googleId: decoded.sub }),
-    });
-    if (res.ok) {
-      navigate('/dashboard'); // Redirect to dashboard on successful Google sign-in
-    } else {
-      alert('Google sign-in failed');
+    try {
+      const decoded = jwtDecode(response.credential); // Decoding the JWT token
+      const res = await fetch('/api/auth/google-signup', { // Correct API route
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: decoded.email, name: decoded.name, googleId: decoded.sub }),
+      });
+
+      if (res.ok) {
+        navigate('/dashboard'); // Redirect to dashboard on successful Google sign-in
+      } else {
+        alert('Google sign-in failed');
+      }
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      alert('An error occurred with Google sign-in. Please try again.');
     }
   };
 
@@ -83,7 +96,6 @@ const Signup = () => {
           />
         </div>
       </div>
-      {/* Add an overlay effect */}
       <div className="signup-overlay"></div>
     </div>
   );

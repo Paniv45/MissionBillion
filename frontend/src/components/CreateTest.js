@@ -12,7 +12,7 @@ const CreateTest = () => {
   });
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
-  const [includePYQ, setIncludePYQ] = useState(false); // New state for PYQ selection
+  const [includePYQ, setIncludePYQ] = useState(false);
   const [selectedChapters, setSelectedChapters] = useState({
     Physics: [],
     Chemistry: [],
@@ -25,7 +25,7 @@ const CreateTest = () => {
     const fetchChapters = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`http://example.com/api/chapters?class=${selectedClass}`);
+          const response = await axios.get(`http://localhost:5000/api/chapters?class=${selectedClass}`);
           setChapters(response.data);
         } catch (error) {
           console.error('Error fetching chapters:', error);
@@ -71,7 +71,6 @@ const CreateTest = () => {
       <div className="create-test-container">
         <h1>Create Test</h1>
 
-        {/* PYQ Selection */}
         <div className="dropdown-container">
           <h2>Include Previous Year Questions (PYQ)?</h2>
           <select value={includePYQ ? 'yes' : 'no'} onChange={handlePYQChange} className="class-dropdown">
@@ -80,7 +79,6 @@ const CreateTest = () => {
           </select>
         </div>
 
-        {/* Conditional Year Selection */}
         {includePYQ && (
           <div className="dropdown-container">
             <h2>Choose Year for PYQ:</h2>
@@ -96,7 +94,6 @@ const CreateTest = () => {
           </div>
         )}
 
-        {/* Class Selection Dropdown */}
         <div className="dropdown-container">
           <h2>Select Class:</h2>
           <select value={selectedClass} onChange={handleClassChange} className="class-dropdown">
@@ -126,7 +123,6 @@ const CreateTest = () => {
           ))}
         </div>
 
-        {/* Start Test Button */}
         <button onClick={handleStartTest} className="start-test-button">
           Review Test Syllabus
         </button>

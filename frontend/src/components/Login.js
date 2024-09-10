@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode'; // Correct named import
-
+import { jwtDecode } from 'jwt-decode';// Corrected import for jwtDecode
 
 const LoginModal = ({ show, handleClose }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -16,39 +15,54 @@ const LoginModal = ({ show, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiEndpoint = isSignup ? '/api/signup' : '/api/login';
-    const response = await fetch(apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    if (response.ok) {
-      localStorage.setItem('user', 'logged-in');
-      navigate('/create-test');
-      handleClose();
-    } else {
-      alert(`${isSignup ? 'Signup' : 'Login'} failed`);
+    const apiEndpoint = isSignup ? '/api/signup' : '/api/login'; // Adjusted API endpoints
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        localStorage.setItem('user', 'logged-in');
+        navigate('/create-test');
+        handleClose();
+      } else {
+        alert(`${isSignup ? 'Signup' : 'Login'} failed`);
+      }
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      alert('An error occurred. Please try again.');
     }
   };
 
   const toggleForm = () => setIsSignup(!isSignup);
 
   const handleGoogleSuccess = async (response) => {
-    const decoded = jwtDecode(response.credential); // Use named import
-    const res = await fetch('/api/google-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: decoded.email, name: decoded.name, googleId: decoded.sub }),
-    });
-    if (res.ok) {
-      localStorage.setItem('user', 'logged-in');
-      navigate('/create-test');
-      handleClose();
-    } else {
-      alert('Google login failed');
+    try {
+      const decoded = jwtDecode(response.credential); // Decoding the JWT token
+      const res = await fetch('/api/google-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: decoded.email,
+          name: decoded.name,
+          googleId: decoded.sub,
+        }),
+      });
+
+      if (res.ok) {
+        localStorage.setItem('user', 'logged-in');
+        navigate('/create-test');
+        handleClose();
+      } else {
+        alert('Google login failed');
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      alert('An error occurred with Google login. Please try again.');
     }
   };
-  
 
   const handleGoogleFailure = (error) => {
     console.error('Google Sign-In was unsuccessful. Try again later.', error);
@@ -103,7 +117,6 @@ const LoginModal = ({ show, handleClose }) => {
         </Form>
 
         <div className="google-signin">
-         
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleFailure}
