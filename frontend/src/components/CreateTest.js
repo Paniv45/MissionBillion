@@ -1,4 +1,3 @@
-//CreateTest.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
@@ -66,7 +65,7 @@ const CreateTest = () => {
     });
   };
 
-  const handleStartTest = () => {
+  const handleReviewTestSyllabus = () => {
     navigate('/TestPage', { state: { selectedYear, selectedChapters, selectedClass, includePYQ } });
   };
 
@@ -129,7 +128,7 @@ const CreateTest = () => {
           ))}
         </div>
 
-        <button onClick={handleStartTest} className="start-test-button">
+        <button onClick={handleReviewTestSyllabus} className="start-test-button">
           Review Test Syllabus
         </button>
       </div>

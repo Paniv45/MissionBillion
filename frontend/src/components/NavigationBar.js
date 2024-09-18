@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './NavigationBar.css';
 
 const NavigationBar = ({ onLoginClick }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const checkAuth = () => {
@@ -31,6 +32,7 @@ const NavigationBar = ({ onLoginClick }) => {
     localStorage.removeItem('user');
     setIsLoggedIn(false);
     setUsername('');
+    navigate('/'); // Redirect to dashboard
   };
 
   return (

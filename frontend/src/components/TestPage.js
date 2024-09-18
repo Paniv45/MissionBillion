@@ -1,8 +1,9 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './TestPage.css'; // Import CSS for styling
 
 const TestPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { selectedYear, selectedChapters } = location.state || { selectedYear: '', selectedChapters: {} };
 
@@ -10,6 +11,7 @@ const TestPage = () => {
     // Logic for starting the test can go here
     console.log('Test started with the following details:', { selectedYear, selectedChapters });
     alert('Test started!');
+    navigate('/StartTest'); // Correct way to navigate programmatically
   };
 
   return (
@@ -24,7 +26,6 @@ const TestPage = () => {
               chapters.map((chapter, index) => (
                 <div key={index} className="chapter-item">
                   <h6>{chapter}</h6>
-                 
                 </div>
               ))
             ) : (
