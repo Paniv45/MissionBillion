@@ -23,10 +23,8 @@ const TestPage = () => {
             {chapters.length > 0 ? (
               chapters.map((chapter, index) => (
                 <div key={index} className="chapter-item">
-                  <h4>{chapter}</h4>
-                  {/* Mockup questions - replace with real data */}
-                  <p>Question 1: Sample question for {chapter}?</p>
-                  <p>Question 2: Another sample question for {chapter}?</p>
+                  <h6>{chapter}</h6>
+                 
                 </div>
               ))
             ) : (

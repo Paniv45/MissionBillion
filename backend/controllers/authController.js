@@ -7,14 +7,17 @@ router.post('/signup', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Check if the user already exists
+    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Create a new user
-    const newUser = new User({ username, email, password });
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user with hashed password
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: 'User created successfully' });
@@ -35,7 +38,7 @@ router.post('/google-signup', async (req, res) => {
       return res.status(200).json({ message: 'User already exists', user: existingUser });
     }
 
-    // Create a new user from Google account
+    // Create a new user with Google ID
     const newUser = new User({ email, name, googleId });
     await newUser.save();
 

@@ -1,5 +1,6 @@
+//CreateTest.js
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import './CreateTest.css';
 import axios from 'axios';
@@ -20,21 +21,26 @@ const CreateTest = () => {
   });
 
   const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem('user') !== null;
 
   useEffect(() => {
-    const fetchChapters = async () => {
-      if (selectedClass) {
+    if (selectedClass) {
+      const fetchChapters = async () => {
         try {
           const response = await axios.get(`http://localhost:5000/api/chapters?class=${selectedClass}`);
           setChapters(response.data);
         } catch (error) {
           console.error('Error fetching chapters:', error);
         }
-      }
-    };
+      };
 
-    fetchChapters();
+      fetchChapters();
+    }
   }, [selectedClass]);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
@@ -100,7 +106,6 @@ const CreateTest = () => {
             <option value="">Select Class</option>
             <option value="11">11th</option>
             <option value="12">12th</option>
-            <option value="combined">Combined</option>
           </select>
         </div>
 
@@ -114,6 +119,7 @@ const CreateTest = () => {
                   <input
                     type="checkbox"
                     id={`${subject}-chapter-${index}`}
+                    checked={selectedChapters[subject].includes(chapter)}
                     onChange={() => handleChapterChange(subject, chapter)}
                   />
                   <label htmlFor={`${subject}-chapter-${index}`}>{chapter}</label>

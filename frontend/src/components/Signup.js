@@ -15,17 +15,16 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Use the correct backend URL and ensure the route matches your backend definition
-      const response = await fetch('http://localhost:5000/api/auth/signup', { // Correct URL
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
   
       if (response.ok) {
-        navigate('/login'); // Redirect to login after successful signup
+        navigate('/login'); // Redirect to login on successful signup
       } else {
-        const errorData = await response.json(); // Handle error from server
+        const errorData = await response.json();
         alert(`Signup failed: ${errorData.message}`);
       }
     } catch (error) {
@@ -33,6 +32,7 @@ const Signup = () => {
       alert('An error occurred during signup. Please try again.');
     }
   };
+  
   
 
   const handleGoogleSuccess = async (response) => {

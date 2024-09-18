@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import NavigationBar from './NavigationBar';
@@ -8,16 +8,21 @@ import Footer from './Footer'; // Import the Footer component
 
 const Dashboard = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Initialize state
   const navigate = useNavigate();
 
-  const handleCreateTestClick = () => {
-    navigate('/create-test');
-  };
+  useEffect(() => {
+    // Update the authentication state based on localStorage or other persistent storage
+    setIsAuthenticated(localStorage.getItem('user') !== null);
+  }, []);
 
-  // Uncomment and use if needed
-  // const isLoggedIn = () => {
-  //   return localStorage.getItem('user') !== null; // Adjust based on your actual auth logic
-  // };
+  const handleCreateTestClick = () => {
+    if (isAuthenticated) {
+      navigate('/create-test');
+    } else {
+      setShowLoginModal(true);
+    }
+  };
 
   return (
     <div>
@@ -25,10 +30,7 @@ const Dashboard = () => {
       <div className="dashboard">
         <header className="dashboard-header">
           <h1>Welcome to Your Learning Dashboard</h1>
-          <p>
-            Create your own tests, track progress, and improve your JEE preparation!
-            <FaRocket className="header-icon" />
-          </p>
+          <p>Create your own tests, track progress, and improve your JEE preparation!</p>
           <button className="primary-button" onClick={handleCreateTestClick}>
             Create Test
           </button>
@@ -53,15 +55,17 @@ const Dashboard = () => {
           <div className="feature-card">
             <FaLightbulb className="feature-icon" />
             <h3>Instant Feedback</h3>
-            <p>Get real-time feedback after each test to help you improve.</p>
+            <p>Receive immediate feedback on your test performance.</p>
+          </div>
+          <div className="feature-card">
+            <FaRocket className="feature-icon" />
+            <h3>Enhanced Learning</h3>
+            <p>Improve your knowledge and skills with targeted practice.</p>
           </div>
         </section>
 
-        {/* Render the login modal */}
         <LoginModal show={showLoginModal} handleClose={() => setShowLoginModal(false)} />
       </div>
-      
-      {/* Render the Footer component */}
       <Footer />
     </div>
   );

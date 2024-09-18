@@ -27,6 +27,21 @@
   flex-direction: row;
 }
 
+/* Centered username */
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Styling for the greeting text */
+.navbar-greeting {
+  color: white; /* White color for text */
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* Styling for Nav Links */
 .navbar-nav-left .nav-link {
   color: white !important; /* White text for links */

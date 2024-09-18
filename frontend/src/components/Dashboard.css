@@ -13,7 +13,7 @@ html, body {
   align-items: center;
   padding: 20px;
   background-color: black;
-  height: 100vh; /* Full viewport height */
+  /* Full viewport height */
   box-sizing: border-box; /* Include padding in height calculation */
    /* Allow vertical scroll if needed */
 }

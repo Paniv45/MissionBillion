@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';// Corrected import for jwtDecode
+import {jwtDecode} from 'jwt-decode'; // Correct import
 
 const LoginModal = ({ show, handleClose }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -15,7 +15,7 @@ const LoginModal = ({ show, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiEndpoint = isSignup ? '/api/signup' : '/api/login'; // Adjusted API endpoints
+    const apiEndpoint = isSignup ? 'http://localhost:5000/api/auth/signup' : 'http://localhost:5000/api/auth/login';
     try {
       const response = await fetch(apiEndpoint, {
         method: 'POST',
@@ -24,9 +24,11 @@ const LoginModal = ({ show, handleClose }) => {
       });
 
       if (response.ok) {
-        localStorage.setItem('user', 'logged-in');
+        const responseData = await response.json();
+        localStorage.setItem('user', JSON.stringify(responseData.user)); // Store user in localStorage
         navigate('/create-test');
         handleClose();
+        window.location.reload(); // Reload to update NavBar
       } else {
         alert(`${isSignup ? 'Signup' : 'Login'} failed`);
       }
@@ -41,7 +43,7 @@ const LoginModal = ({ show, handleClose }) => {
   const handleGoogleSuccess = async (response) => {
     try {
       const decoded = jwtDecode(response.credential); // Decoding the JWT token
-      const res = await fetch('/api/google-login', {
+      const res = await fetch('/api/auth/google-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,9 +54,11 @@ const LoginModal = ({ show, handleClose }) => {
       });
 
       if (res.ok) {
-        localStorage.setItem('user', 'logged-in');
+        const userData = await res.json();
+        localStorage.setItem('user', JSON.stringify(userData));
         navigate('/create-test');
         handleClose();
+        window.location.reload(); // Reload to update NavBar
       } else {
         alert('Google login failed');
       }
